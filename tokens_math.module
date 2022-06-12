@@ -1,0 +1,40 @@
+<?php
+
+/**
+ * @file
+ * Contains tokens_math.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_help().
+ */
+function tokens_math_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the tokens_math module.
+    case 'help.page.field_expression':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Custom module for CargoCRM to calculate tokens') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+
+
+/**
+ * Implements hook_form_alter().
+ */
+function tokens_math_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if ($form_id == 'field_storage_config_edit_form') {
+    if (($field_config = $form_state->get('field_config')) && $field_config->get('field_type') == 'tokens_math') {
+      $form['cardinality_container']['#disabled'] = TRUE;
+      unset($form['cardinality_container']['cardinality_number']['#states']);
+      $form['cardinality_container']['#suffix'] = '<div class="description"><em>only single values.</em></div>';
+    }
+  }
+}

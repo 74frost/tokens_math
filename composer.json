@@ -1,0 +1,13 @@
+{
+  "name": "drupal/tokens_math",
+  "type": "drupal-module",
+  "description": "Custom module for CargoCRM",
+  "keywords": ["Drupal"],
+
+ "require": {
+    "webit/eval-math": "^1.0",
+    "drupal/core": "^8 || ^9",
+    "drupal/token": "^1"
+  }
+
+}
